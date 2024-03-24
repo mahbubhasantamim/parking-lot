@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { ForbiddenError } from "../common/model/error.model"
 import { KeyConstant } from "../config/constant/key.constant"
+import { UserTypeObject } from "../config/db/schema/user/user.schema"
 import { AccessTokenUtil } from "../utils/access-token.util"
 
 const isLoggedInMid = async (req: Request, res: Response, next: NextFunction) => {
@@ -34,7 +35,20 @@ const isSuperAdmin = (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const isManagerOrSuperAdmin = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (req.user.isSuperAdmin === true || req.user.userType === UserTypeObject.manager) {
+            next()
+        } else {
+            throw new ForbiddenError("You don't have permission")
+        }
+    } catch (e) {
+        next(e)
+    }
+}
+
 export const AuthMid = {
     isLoggedInMid,
     isSuperAdmin: [isLoggedInMid, isSuperAdmin],
+    isManagerOrSuperAdmin: [isLoggedInMid, isManagerOrSuperAdmin],
 }

@@ -18,6 +18,8 @@ export const ZodNumericNonNegString = z
     .trim()
     .regex(new RegExp(Constant.STRING_NUM_PATTERN_NON_NEG), "Only positive number is allowed")
 
+export const ZodSimpleNumber = z.number().max(Constant.MAX_NUM_AMOUNT)
+
 export const ZodSimpleString = z.string().trim().nonempty("It's Required")
 
 export const ZodSimpleEmptyString = z.string().trim()

@@ -2,7 +2,13 @@ import bcryptjs from "bcryptjs"
 import { eq, sql } from "drizzle-orm"
 import { ICurrentUser } from "../../common/model/current-user.model"
 import { IDb, db } from "../../config/db/db"
-import { ICreateUser, IUser, IUserNoPassword, UserSchema } from "../../config/db/schema/user/user.schema"
+import {
+    ICreateUser,
+    IUser,
+    IUserNoPassword,
+    UserSchema,
+    UserTypeObject,
+} from "../../config/db/schema/user/user.schema"
 import { UniqueId } from "../../utils/common.util"
 import { ICreateUserDto } from "./dto/user.dto"
 
@@ -50,6 +56,7 @@ export const UserService = {
                 password: true,
                 isSuperAdmin: true,
                 timeZone: true,
+                userType: true,
             },
         })
 
@@ -111,15 +118,11 @@ export const UserService = {
         const where = by === "id" ? eq(UserSchema.id, identifier) : eq(UserSchema.email, identifier)
         await db.delete(UserSchema).where(where)
     },
-    convertUserToCurrentUser: (user: {
-        id: string
-        password: string
-        isSuperAdmin: boolean
-        timeZone: string
-    }) => {
+    convertUserToCurrentUser: (user: ICurrentUser) => {
         return {
             id: user.id,
             isSuperAdmin: user.isSuperAdmin || false,
+            userType: user.userType || UserTypeObject.user,
             timeZone: user.timeZone,
         } satisfies ICurrentUser
     },
