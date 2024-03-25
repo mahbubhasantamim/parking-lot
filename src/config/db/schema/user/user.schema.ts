@@ -1,9 +1,14 @@
 import { sql } from "drizzle-orm"
 import { boolean, datetime, mysqlEnum, mysqlTable, varchar } from "drizzle-orm/mysql-core"
+import { CommonUtil } from "../../../../utils/common.util"
 import { Constant } from "../../../constant/common.constant"
 
 export const GenderEnum = ["male", "female"] as const
 export type IGenderEnum = (typeof GenderEnum)[number]
+
+export const UserTypeEnum = ["user", "manager"] as const
+export type IUserTypeEnum = (typeof UserTypeEnum)[number]
+export const UserTypeObject = CommonUtil.convertArrayToObject(UserTypeEnum)
 
 export const UserSchema = mysqlTable("user_table", {
     id: varchar("id", { length: 50 }).primaryKey(),
@@ -15,6 +20,7 @@ export const UserSchema = mysqlTable("user_table", {
     avatar: varchar("avatar", { length: 255 }),
     isEmailVerified: boolean("is_email_verified").default(false).notNull(),
     isSuperAdmin: boolean("is_super_admin").default(false).notNull(),
+    userType: mysqlEnum("user_type", UserTypeEnum).default("user").notNull(),
 
     // address
     countryCode: varchar("country_code", { length: 5 }).default("BD").notNull(),
