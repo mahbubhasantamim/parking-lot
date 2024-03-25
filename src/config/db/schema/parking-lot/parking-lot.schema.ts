@@ -1,11 +1,10 @@
 import { sql } from "drizzle-orm"
-import { datetime, int, mysqlTable, varchar } from "drizzle-orm/mysql-core"
+import { datetime, mysqlTable, varchar } from "drizzle-orm/mysql-core"
 import { Constant } from "../../../constant/common.constant"
 
 export const ParkingLotSchema = mysqlTable("parking_lot_table", {
     id: varchar("id", { length: 50 }).primaryKey(),
     lotName: varchar("lot_name", { length: 255 }).notNull(),
-    totalSlot: int("total_slot").notNull(),
 
     // address
     city: varchar("city", { length: 50 }),

@@ -1,0 +1,1 @@
+ALTER TABLE `parking_lot_table` DROP COLUMN `total_slot`;

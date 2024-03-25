@@ -3,6 +3,7 @@ import mysql from "mysql2/promise"
 import { EnvConfig } from "../env.config"
 
 import * as parkingLot from "./schema/parking-lot/parking-lot.schema"
+import * as parkingSlot from "./schema/parking-slot/parking-slot.schema"
 import * as user from "./schema/user/user.schema"
 import * as vehicle from "./schema/vehicle/vehicle.schema"
 
@@ -10,6 +11,7 @@ const schemas = {
     ...user,
     ...parkingLot,
     ...vehicle,
+    ...parkingSlot,
 }
 
 export const dbPool = mysql.createPool({
