@@ -4,10 +4,12 @@ import { EnvConfig } from "../env.config"
 
 import * as parkingLot from "./schema/parking-lot/parking-lot.schema"
 import * as user from "./schema/user/user.schema"
+import * as vehicle from "./schema/vehicle/vehicle.schema"
 
 const schemas = {
     ...user,
     ...parkingLot,
+    ...vehicle,
 }
 
 export const dbPool = mysql.createPool({
