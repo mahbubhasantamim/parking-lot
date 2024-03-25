@@ -1,0 +1,2 @@
+ALTER TABLE `parking_slot_table` ADD `lot_id` varchar(50);--> statement-breakpoint
+ALTER TABLE `parking_slot_table` ADD CONSTRAINT `parking_slot_table_lot_id_parking_lot_table_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `parking_lot_table`(`id`) ON DELETE cascade ON UPDATE no action;

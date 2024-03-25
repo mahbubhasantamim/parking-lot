@@ -29,7 +29,6 @@ export const ParkingLotService = {
             .update(ParkingLotSchema)
             .set({
                 lotName: body.lotName,
-                totalSlot: body.totalSlot,
                 city: body.city,
                 state: body.state,
                 zipCode: body.zipCode,
