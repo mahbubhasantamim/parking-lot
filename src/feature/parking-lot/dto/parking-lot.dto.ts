@@ -1,15 +1,8 @@
 import { z } from "zod"
-import {
-    ZodDateString,
-    ZodMin1UpdateRefine,
-    ZodNameString,
-    ZodSimpleNumber,
-    ZodSimpleString,
-} from "../../../utils/zod.util"
+import { ZodDateString, ZodMin1UpdateRefine, ZodNameString, ZodSimpleString } from "../../../utils/zod.util"
 
 export const CreateParkingLotDto = z.object({
     lotName: ZodNameString.min(2).max(200),
-    totalSlot: ZodSimpleNumber,
     city: ZodSimpleString,
     state: ZodSimpleString,
     zipCode: ZodSimpleString,

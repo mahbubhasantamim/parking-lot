@@ -1,0 +1,1 @@
+ALTER TABLE `vehicle_parking_table` ADD `created_at` datetime DEFAULT (CURRENT_TIMESTAMP) NOT NULL;
