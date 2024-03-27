@@ -30,6 +30,7 @@ export const ReportsService = {
             totalParking,
             totalParkingMinutes: `${totalHours}H.${totalMinutes}M`,
             totalFeeCollect,
+            list,
         }
         return report
     },
